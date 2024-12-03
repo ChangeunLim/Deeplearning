@@ -22,7 +22,7 @@ train_datagen = ImageDataGenerator(
 # 학습 데이터셋 로드
 train_generator = train_datagen.flow_from_directory(
     base_dir,
-    target_size=(128, 128),  # 이미지 크기
+3203    target_size=(128, 128),  # 이미지 크기
     batch_size=32,
     class_mode='categorical',  # 다중 클래스 분류
     subset='training'
@@ -47,7 +47,7 @@ model = Sequential([
     MaxPooling2D((2, 2)),
     Flatten(),
     Dense(128, activation='relu'),
-    Dropout(0.5),
+    Dropout(0.3),
     Dense(train_generator.num_classes, activation='softmax')  # 클래스 개수에 맞게 출력
 ])
 
@@ -62,7 +62,7 @@ model.compile(
 history = model.fit(
     train_generator,
     validation_data=validation_generator,
-    epochs=10,
+    epochs=40,
     steps_per_epoch=train_generator.samples // train_generator.batch_size,
     validation_steps=validation_generator.samples // validation_generator.batch_size
 )
